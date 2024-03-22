@@ -172,18 +172,18 @@ Table for readonly for users!!
 
 | **id** | **name**                     |
 | ------ | ---------------------------- |
-|        | View members list/profile    |
-|        | View candidates list/profile |
-|        | Edit own profile             |
-|        | Edit user profiles           |
-|        | Add (edit own) vacancy       |
-|        | View vacancies               |
-|        | Edit user roles              |
-|        | Edit user rate               |
-|        | Add articles/blog            |
-|        | Edit own articles/blog       |
-|        | Edit user articles/blog      |
-|        | Edit system dictionaries     |
+|    1   | View members list/profile    |
+|    2   | View candidates list/profile |
+|    3   | Edit own profile             |
+|    4   | Edit user profiles           |
+|    5   | Add (edit own) vacancy       |
+|    6   | View vacancies               |
+|    7   | Edit user roles              |
+|    8   | Edit user rate               |
+|    9   | Add articles/blog            |
+|   10   | Edit own articles/blog       |
+|   11   | Edit user articles/blog      |
+|   12   | Edit system dictionaries     |
 
 
  
