@@ -5,13 +5,11 @@
 | Version | 0.0.1            |
 
 
- 
+### 1. Table “users”
 
-1. ### Table “users”
+Table for common users information 
 
-​    Table for common users information 
-
-##### 			                                                                    Table “users” columns
+##### Table “users” columns
 
 | **Name**      | **Type**     | **Default**      | **required** | **Comment**            |
 | ------------- | ------------ | ---------------- | ------------ | ---------------------- |
@@ -32,10 +30,7 @@
 | updated_at    | Date         |                  |              |                        |
 | version       | int8         | 0                |              | Optional!              |
 
-
- 
-
-#####                         															Table “users” indexes
+##### Table “users” indexes
 
 | **Name**   | **Columns** | **Unique?** |
 | ---------- | ----------- | ----------- |
@@ -43,7 +38,7 @@
 | users_ind1 | email       | +           |
 | users_ind2 | created_at  |             |
 
-#####                      															 Table “users” constraints
+##### Table “users” constraints
 
 | **Name**          | **Columns**                 | **Type**               |
 | ----------------- | --------------------------- | ---------------------- |
@@ -53,13 +48,11 @@
 | users_profile_fk1 | profiles.id → users.profile | FK (Cascade on delete) |
 
 
- 
-
-2. ### Table “user_role”
+### 2. Table “user_role”
 
 Table for readonly for users!! Rows may be not exist for candidate! Default role - **candidate** 
 
-##### 																		Table “role” columns
+##### Table “role” columns
 
 | **Name**  | **Type** | **Default** | **required** | **Comment** |
 | --------- | -------- | ----------- | ------------ | ----------- |
@@ -67,94 +60,72 @@ Table for readonly for users!! Rows may be not exist for candidate! Default role
 | role_id   | int4     |             | +            |             |
 | setted_by | uuid     |             | +            |             |
 
-
- 
-
-Table “role” constraints
+##### Table “role” constraints
 
 | **Name** | **Columns**            | **Type** |
 | -------- | ---------------------- | -------- |
 | role_pk0 | role_id, permission_id | PK       |
 
 
- 
-
-# 			Dictionaries spec
+## Dictionaries spec
 
 
- 
-
-1. ### Dictionary table “role”
+### 1. Dictionary table “role”
 
 Table for readonly for users!!
 
-##### 																		Table “role” columns
+##### Table “role” columns
 
 | **Name** | **Type**    | **Default** | **required** | **Comment** |
 | -------- | ----------- | ----------- | ------------ | ----------- |
 | id       | int4        |             | +            | PK          |
 | name     | varchar(50) |             | +            |             |
 
-
- 
-
-##### 																		Table “role” constraints
+##### Table “role” constraints
 
 | **Name** | **Columns** | **Type** |
 | -------- | ----------- | -------- |
 | role_pk0 | id          | PK       |
 
 
- 
-
-2. ### Dictionary table “permission”
+### 2. Dictionary table “permission”
 
 Table for readonly for users!!
 
-##### 																	Table “permission” columns
+##### Table “permission” columns
 
 | **Name** | **Type**     | **Default** | **required** | **Comment** |
 | -------- | ------------ | ----------- | ------------ | ----------- |
 | id       | int4         |             | +            | PK          |
 | name     | varchar(255) |             | +            |             |
 
-
- 
-
-##### 																Table “permission” constraints
+##### Table “permission” constraints
 
 | **Name**       | **Columns** | **Type** |
 | -------------- | ----------- | -------- |
 | permission_pk0 | id          | PK       |
 
-
- 
-
-3. ### Dictionary table “role_permission”
+### 3. Dictionary table “role_permission”
 
 Table for readonly for users!!
 
-##### 																		Table “role” columns
+##### Table “role” columns
 
 | **Name**      | **Type** | **Default** | **required** | **Comment** |
 | ------------- | -------- | ----------- | ------------ | ----------- |
 | role_id       | int4     |             | +            | PK          |
 | permission_id | int4     |             | +            | PK          |
 
-
-
-##### 																		Table “role” constraints
+##### Table “role” constraints
 
 | **Name** | **Columns**            | **Type** |
 | -------- | ---------------------- | -------- |
 | role_pk0 | role_id, permission_id | PK       |
 
 
- 
-
 ## 					Dictionaries content
 
-1. ### Role
+### 1. Role
 
 | **id** | **name**  |
 | ------ | --------- |
@@ -165,10 +136,7 @@ Table for readonly for users!!
 | 5      | HR        |
 | 6      | client    |
 
-
- 
-
-2. ### Permission
+### 2. Permission
 
 | **id** | **name**                     |
 | ------ | ---------------------------- |
@@ -186,9 +154,7 @@ Table for readonly for users!!
 |   12   | Edit system dictionaries     |
 
 
- 
-
-3. ### Role_permission
+### 3. Role_permission
 
 | **role_id** | **permission_id (as list)**           |
 | ----------- | ------------------------------------- |
@@ -199,9 +165,7 @@ Table for readonly for users!!
 | 5           | 1, 5                                  |
 
 
- 
-
-## 						Changes
+## Changes
 
 | **Date**   | **Author**       | **Description**                            |
 | ---------- | ---------------- | ------------------------------------------ |
