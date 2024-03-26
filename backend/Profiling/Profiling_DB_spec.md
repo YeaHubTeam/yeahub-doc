@@ -2,7 +2,7 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.1            |
+| Version | 0.0.2            |
 
 
 
@@ -85,7 +85,6 @@ For separate rating process  for every profile.
 | profile_skills_pk1 | profile_id, skill_id | PK       |
 
 
-
 ### 4. Table “profile_achievements”
 
 Hold profile achievement
@@ -115,19 +114,20 @@ Hold profile achievement
 
 Hold profile to profile marking events
 
-##### Table “profile_achievements” columns
+##### Table “profile_rates” columns
 
 | **Name**       | **Type** | **Default**  | **required** | **Comment** |
 | -------------- | -------- | ------------ | ------------ | ----------- |
 | profile_id     | uuid     |              | +            | FK          |
-| achievement_id | int8     |              | +            | FK          |
+| user_marked_id | uuid     |              | +            | FK          |
+| mark           | int8     |              | +            |             |
 | getting_at     | Date     | current_date | +            |             |
 
-##### Table “profile_achievements” indexes
+##### Table “profile_rates” indexes
 
 | **Name**                  | **Columns** | **Unique?** |
 | ------------------------- | ----------- | ----------- |
-| profile_achievements_ind0 | getting_at  |             |
+| profile_rates_ind0        | getting_at  |             |
 
 ##### Table “profile_rate” constraints
 
@@ -135,7 +135,33 @@ Hold profile to profile marking events
 | ---------------- | -------------------------- | -------- |
 | profile_rate_pk1 | profile_id, achievement_id | PK       |
 
- 
+
+### 6. Table “profession_skills”
+
+Skills to professions relation table
+
+##### Table “profession_skills” columns
+
+| **Name**       | **Type** | **Default**  | **required** | **Comment** |
+| -------------- | -------- | ------------ | ------------ | ----------- |
+| profession_id  | int8     |              | +            | FK          |
+| skill_id       | int8     |              | +            | FK          |
+| added_at       | Date     | current_date | +            |             |
+
+##### Table “profession_skills” indexes
+
+| **Name**                  | **Columns** | **Unique?** |
+| ------------------------- | ----------- | ----------- |
+| profession_skills_ind0    | added_at    |             |
+
+##### Table “profession_skills” constraints
+
+| **Name**                 | **Columns**                | **Type** |
+| ------------------------ | -------------------------- | -------- |
+| profession_skills_pk1    | profession_id, skill_id    | PK       |
+
+
+
 ## Dictionaries spec
 
 ### 1. Dictionary table “skills”
@@ -194,6 +220,34 @@ Table for readonly for users!!
 | achievements_pk0 | id          | PK       |
 
 
+### 3. Dictionary table “professions”
+
+Table for readonly for users!!
+
+##### Table “professions” columns
+
+| **Name**    | **Type**     | **Default**  | **required** | **Comment** |
+| ----------- | ------------ | ------------ | ------------ | ----------- |
+| id          | int8         |              | +            | PK          |
+| title       | varchar(255) |              | +            |             |
+| description | text         |              | +            |             |
+| imageSrc    | varchar(255) |              |              |             |
+| created_at  | Date         | current_date | +            |             |
+| updated_at  | Date         |              |              |             |
+
+##### Table “professions” indexes
+
+| **Name**          | **Columns** | **Unique?** |
+| ----------------- | ----------- | ----------- |
+| professions_ind0 | title       | +           |
+
+##### Table “professions” constraints
+
+| **Name**         | **Columns** | **Type** |
+| ---------------- | ----------- | -------- |
+| professions_pk0 | id          | PK       |
+
+
 
 ## Dictionaries content
 
@@ -213,6 +267,14 @@ Content of this dictionary stored as ./csv/skills.csv
 
 Content of this dictionary stored as ./csv/achievements.csv
 
+### 3. Professions
+
+| **id** | **title** | **decriprion** |
+| ------ | --------- | -------------- |
+|        |           |                |
+
+Content of this dictionary stored as ./csv/professions.csv
+
 
 ## Changes
 
@@ -220,7 +282,7 @@ Content of this dictionary stored as ./csv/achievements.csv
 | ---------- | ---------------- | ------------------------------------------------------- |
 | 06.03.2024 | Knyaginin Dmitry | YH-46. Create Profiling module DB specification         |
 | 08.03.2024 | Knyaginin Dmitry | YH-46. Add ratings and achievements to Profiling module |
-|            |                  |                                                         |
+| 26.03.2024 | Knyaginin Dmitry | YH-46. Add professions dictionary                       |
 |            |                  |                                                         |
 |            |                  |                                                         |
 |            |                  |                                                         |
