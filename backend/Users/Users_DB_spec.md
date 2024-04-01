@@ -2,7 +2,7 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.1            |
+| Version | 0.0.2            |
 
 
 ### 1. Table “users”
@@ -19,6 +19,7 @@ Table for common users information
 | password_hash | varchar(255) |                  | +            | May be should separate |
 | phone         | varchar(50)  |                  | +            |                        |
 | email         | varchar(255) |                  | +            |                        |
+| links         | text         |'[]'              |              | JSON struct for front  |
 | country       | varchar(255) |                  |              |                        |
 | city          | varchar(255) |                  |              |                        |
 | birthday      | Date         |                  |              |                        |
@@ -170,6 +171,7 @@ Table for readonly for users!!
 | **Date**   | **Author**       | **Description**                            |
 | ---------- | ---------------- | ------------------------------------------ |
 | 06.03.2024 | Knyaginin Dmitry | YH-46. Create User module DB specification |
+| 01.04.2024 | Knyaginin Dmitry | YH-46. Add links field to Users table      |
 |            |                  |                                            |
 |            |                  |                                            |
 |            |                  |                                            |
