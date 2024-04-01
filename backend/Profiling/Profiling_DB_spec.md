@@ -2,7 +2,7 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.2            |
+| Version | 0.0.3            |
 
 
 
@@ -12,12 +12,13 @@ For specify user concrete type. Now by “profile_type” column (see comment)
 
 ##### Table “profiles” columns
 
-| **Name**       | **Type** | **Default** | **required** | **Comment**                                                        |
-| -------------- | -------- | ----------- | ------------ | -------------------------------------------------------------------|
-| id             | uuid     |             | +            | PK                                                                 |
-| user_id        | uuid     |             | +            | FK                                                                 |
-| profile_type   | int4     | 1           | +            | 1 – candidate, 2 – member,   3 - HR                                |
-| marking_weight | int4     | 1           |              | For candidate only: weight in rating_points “like” from this  user |
+| **Name**          | **Type** | **Default** | **required** | **Comment**                                                        |
+| ----------------- | -------- | ----------- | ------------ | -------------------------------------------------------------------|
+| id                | uuid     |             | +            | PK                                                                 |
+| user_id           | uuid     |             | +            | FK                                                                 |
+| profile_type      | int4     | 1           | +            | 1 – candidate, 2 – member,   3 - HR                                |
+| specialization_id | int8     |             | +            | FK for specializations.id                                 |
+| marking_weight    | int4     | 1           |              | For candidate only: weight in rating_points “like” from this  user |
 
 ##### Table “profiles” indexes
 
@@ -27,11 +28,12 @@ For specify user concrete type. Now by “profile_type” column (see comment)
 
 ##### Table “profiles” constraints
 
-| **Name**     | **Columns**           | **Type** |
-| ------------ | --------------------- | -------- |
-| profiles_pk1 | id                    | PK       |
-| profiles_uk1 | user_id, profile_type | UK       |
-
+| **Name**     | **Columns**                | **Type** |
+| ------------ | -------------------------- | -------- |
+| profiles_pk1 | id                         | PK       |
+| profiles_uk1 | user_id, specialization_id | UK       |
+| profiles_fk1 | user_id                    | FK       |
+| profiles_fk2 | specialization_id          | FK       |
 
 
 ### 2. Table “profile_rate”
@@ -136,30 +138,119 @@ Hold profile to profile marking events
 | profile_rate_pk1 | profile_id, achievement_id | PK       |
 
 
-### 6. Table “profession_skills”
+### 6. Table “specialization_skills”
 
-Skills to professions relation table
+Skills to specializations relation table
 
-##### Table “profession_skills” columns
+##### Table “specialization_skills” columns
 
-| **Name**       | **Type** | **Default**  | **required** | **Comment** |
-| -------------- | -------- | ------------ | ------------ | ----------- |
-| profession_id  | int8     |              | +            | FK          |
-| skill_id       | int8     |              | +            | FK          |
-| added_at       | Date     | current_date | +            |             |
+| **Name**          | **Type** | **Default**  | **required** | **Comment** |
+| --------------    | -------- | ------------ | ------------ | ----------- |
+| specialization_id | int8     |              | +            | FK          |
+| skill_id          | int8     |              | +            | FK          |
+| added_at          | Date     | current_date | +            |             |
 
-##### Table “profession_skills” indexes
+##### Table “specialization_skills” indexes
 
-| **Name**                  | **Columns** | **Unique?** |
-| ------------------------- | ----------- | ----------- |
-| profession_skills_ind0    | added_at    |             |
+| **Name**                      | **Columns** | **Unique?** |
+| ----------------------------- | ----------- | ----------- |
+| specialization_skills_ind0    | added_at    |             |
 
-##### Table “profession_skills” constraints
+##### Table “specialization_skills” constraints
 
-| **Name**                 | **Columns**                | **Type** |
-| ------------------------ | -------------------------- | -------- |
-| profession_skills_pk1    | profession_id, skill_id    | PK       |
+| **Name**                     | **Columns**                 | **Type** |
+| ---------------------------- | --------------------------- | -------- |
+| specialization_skills_pk1    | specialization_id, skill_id | PK       |
 
+
+### 7. Table “jobs”
+
+Resume jobs
+
+##### Table “jobs” columns
+
+| **Name**          | **Type**    | **Default** | **required** | **Comment**                                                        |
+| --------------    | ----------- | ----------- | ------------ | -------------------------------------------------------------------|
+| id                | uuid        |             | +            | PK                                                                 |
+| profile_id        | uuid        |             | +            | FK                                                                 |
+| title             | varchar(250)|             |              |                                                                    |
+| information       | text        |             |              |                                                                    |
+| start_date        | Date        |             | +            | start working date                                                 |
+| end_date          | Date        |             |              | end date (optional)                                                |
+
+
+##### Table “jobs” indexes
+
+| **Name**      | **Columns**            | **Unique?** |
+| ------------- | ---------------------- | ----------- |
+| jobs_ind0     | profile_id             |             |
+
+##### Table “jobs” constraints
+
+| **Name**     | **Columns**           | **Type** |
+| ------------ | --------------------- | -------- |
+| jobs_pk1     | id                    | PK       |
+| jobs_fk1     | profile_id            | FK       |
+
+
+### 8. Table “educations”
+
+Profile educations
+
+##### Table “educations” columns
+
+| **Name**          | **Type**    | **Default** | **required** | **Comment**                                                        |
+| --------------    | ----------- | ----------- | ------------ | -------------------------------------------------------------------|
+| id                | uuid        |             | +            | PK                                                                 |
+| profile_id        | uuid        |             | +            | FK                                                                 |
+| title             | varchar(250)|             |              |                                                                    |
+| information       | text        |             |              |                                                                    |
+| start_date        | Date        |             | +            | start working date                                                 |
+| end_date          | Date        |             |              | end date (optional)                                                |
+
+
+##### Table “educations” indexes
+
+| **Name**         | **Columns**            | **Unique?** |
+| ---------------- | ---------------------- | ----------- |
+| educations_ind0  | profile_id             |             |
+
+##### Table “educations” constraints
+
+| **Name**        | **Columns**           | **Type** |
+| --------------- | --------------------- | -------- |
+| educations_pk1  | id                    | PK       |
+| educations_fk1  | profile_id            | FK       |
+
+
+### 9. Table “projects”
+
+Resume projects
+
+##### Table “projects” columns
+
+| **Name**          | **Type**    | **Default** | **required** | **Comment**                                                        |
+| --------------    | ----------- | ----------- | ------------ | -------------------------------------------------------------------|
+| id                | uuid        |             | +            | PK                                                                 |
+| profile_id        | uuid        |             | +            | FK                                                                 |
+| title             | varchar(250)|             |              |                                                                    |
+| information       | text        |             |              |                                                                    |
+| url               | text        |             |              | remote project url                                                 |
+| file              | bytea       |             |              | project file content (bytes)                                       |
+| imageSrc          | text        |             |              | preview image for project (optional)                              |
+
+##### Table “projects” indexes
+
+| **Name**         | **Columns**            | **Unique?** |
+| ---------------- | ---------------------- | ----------- |
+| projects_ind0    | profile_id             |             |
+
+##### Table “projects” constraints
+
+| **Name**        | **Columns**           | **Type** |
+| --------------- | --------------------- | -------- |
+| projects_pk1    | id                    | PK       |
+| projects_fk1    | profile_id            | FK       |
 
 
 ## Dictionaries spec
@@ -220,35 +311,6 @@ Table for readonly for users!!
 | achievements_pk0 | id          | PK       |
 
 
-### 3. Dictionary table “professions”
-
-Table for readonly for users!!
-
-##### Table “professions” columns
-
-| **Name**    | **Type**     | **Default**  | **required** | **Comment** |
-| ----------- | ------------ | ------------ | ------------ | ----------- |
-| id          | int8         |              | +            | PK          |
-| title       | varchar(255) |              | +            |             |
-| description | text         |              | +            |             |
-| imageSrc    | varchar(255) |              |              |             |
-| created_at  | Date         | current_date | +            |             |
-| updated_at  | Date         |              |              |             |
-
-##### Table “professions” indexes
-
-| **Name**          | **Columns** | **Unique?** |
-| ----------------- | ----------- | ----------- |
-| professions_ind0 | title       | +           |
-
-##### Table “professions” constraints
-
-| **Name**         | **Columns** | **Type** |
-| ---------------- | ----------- | -------- |
-| professions_pk0 | id          | PK       |
-
-
-
 ## Dictionaries content
 
 ### 1. Skills
@@ -267,14 +329,6 @@ Content of this dictionary stored as ./csv/skills.csv
 
 Content of this dictionary stored as ./csv/achievements.csv
 
-### 3. Professions
-
-| **id** | **title** | **decriprion** |
-| ------ | --------- | -------------- |
-|        |           |                |
-
-Content of this dictionary stored as ./csv/professions.csv
-
 
 ## Changes
 
@@ -282,7 +336,7 @@ Content of this dictionary stored as ./csv/professions.csv
 | ---------- | ---------------- | ------------------------------------------------------- |
 | 06.03.2024 | Knyaginin Dmitry | YH-46. Create Profiling module DB specification         |
 | 08.03.2024 | Knyaginin Dmitry | YH-46. Add ratings and achievements to Profiling module |
-| 26.03.2024 | Knyaginin Dmitry | YH-46. Add professions dictionary                       |
+| 01.04.2024 | Knyaginin Dmitry | YH-46. Add jobs, educations e.t.c to Profiling module   |
 |            |                  |                                                         |
 |            |                  |                                                         |
 |            |                  |                                                         |
