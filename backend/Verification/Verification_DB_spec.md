@@ -1,4 +1,4 @@
-# Validation module tables
+# Verification module tables
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
@@ -63,7 +63,7 @@
 | specialization_id | int4         |              | +            |                       |
 | approved_skill_id | int8         |              |              |for skill testing      |
 
-- (1) - "type" column has next values "SELF_CHECK", "ONLINE_VALIDATION_CHECKLIST", "SKILL_TEST" may be Enum
+- (1) - "type" column has next values "SELF_CHECK", "ONLINE_Verification_CHECKLIST", "" may be Enum
 
 ##### Table “tests” indexes
 
@@ -130,9 +130,9 @@
 | tests_pass_attempts_pk0 | test_id, user_id | PK       |
 
 
-### 5. Table “validation_online_session_requests”
+### 5. Table “verification_online_session_requests”
 
-##### Table “validation_online_session_requests” columns
+##### Table “verification_online_session_requests” columns
 
 | **Name**          | **Type** | **Default**  | **required** | **Comment** |
 | ----------------- | -------- | ------------ | ------------ | ----------- |
@@ -145,53 +145,53 @@
 | created_at        | Date     | current_date | +            |             |
 | updated_at        | Date     |              |              |             |
 
-##### Table “validation_online_session_requests” indexes
+##### Table “verification_online_session_requests” indexes
 
-| **Name**                                | **Columns**       | **Unique?** |
-| --------------------------------------- | ----------------- | ----------- |
-| validation_online_session_requests_ind0 | created_at        |             |
-| validation_online_session_requests_ind0 | specialization_id |             |
+| **Name**                                  | **Columns**       | **Unique?** |
+| ----------------------------------------- | ----------------- | ----------- |
+| verification_online_session_requests_ind0 | created_at        |             |
+| verification_online_session_requests_ind0 | specialization_id |             |
 
-##### Table “validation_online_session_requests” constraints
+##### Table “verification_online_session_requests” constraints
 
-| **Name**                               | **Columns**                                        | **Type** |
-| -------------------------------------- | -------------------------------------------------- | -------- |
-| validation_online_session_requests_pk0 | id                                                 | PK       |
-| validation_online_session_requests_fk0 | user_id                                            | FK       |
-| validation_online_session_requests_fk1 | validation_online_request_states.specialization_id | FK       |
-
-
-### 6. Table “validation_online_session_attempts”
-
-##### Table “validation_online_session_attempts” columns
-
-| **Name**         | **Type** | **Default** | **required** | **Comment** |
-| ---------------- | -------- | ----------- | ------------ | ----------- |
-| id               | uuid     |             | +            | PK          |
-| validation_reqid | uuid     |             | +            | FK          |
-| plan_date        | Date     |             | +            |             |
-| begin_at         | Date     |             |              |             |
-| end_at           | Date     |             |              |             |
-| isSuccess        | boolean  |             |              |             |
-| feedback         | text     |             |              |             |
-
-##### Table “validation_online_session_attempts” indexes
-
-| **Name**                                | **Columns** | **Unique?** |
-| --------------------------------------- | ----------- | ----------- |
-| validation_online_session_attempts_ind0 | plan_date   |             |
-
-##### Table “validation_online_session_attempts” constraints
-
-| **Name**                               | **Columns**      | **Type** |
-| -------------------------------------- | ---------------- | -------- |
-| validation_online_session_attempts_pk0 | id               | PK       |
-| validation_online_session_attempts_fk0 | validation_reqid | FK       |
+| **Name**                                 | **Columns**                                          | **Type** |
+| ---------------------------------------- | ---------------------------------------------------- | -------- |
+| verification_online_session_requests_pk0 | id                                                   | PK       |
+| verification_online_session_requests_fk0 | user_id                                              | FK       |
+| verification_online_session_requests_fk1 | verification_online_request_states.specialization_id | FK       |
 
 
-### 7. Table “validation_offline_tasks”
+### 6. Table “verification_online_session_attempts”
 
-##### Table “validation_offline_tasks” columns
+##### Table “verification_online_session_attempts” columns
+
+| **Name**           | **Type** | **Default** | **required** | **Comment** |
+| ------------------ | -------- | ----------- | ------------ | ----------- |
+| id                 | uuid     |             | +            | PK          |
+| verification_reqid | uuid     |             | +            | FK          |
+| plan_date          | Date     |             | +            |             |
+| begin_at           | Date     |             |              |             |
+| end_at             | Date     |             |              |             |
+| isSuccess          | boolean  |             |              |             |
+| feedback           | text     |             |              |             |
+
+##### Table “verification_online_session_attempts” indexes
+
+| **Name**                                  | **Columns** | **Unique?** |
+| ----------------------------------------- | ----------- | ----------- |
+| verification_online_session_attempts_ind0 | plan_date   |             |
+
+##### Table “verification_online_session_attempts” constraints
+
+| **Name**                                 | **Columns**        | **Type** |
+| --------------------------------------   | ------------------ | -------- |
+| verification_online_session_attempts_pk0 | id                 | PK       |
+| verification_online_session_attempts_fk0 | verification_reqid | FK       |
+
+
+### 7. Table “verification_offline_tasks”
+
+##### Table “verification_offline_tasks” columns
 
 | **Name**          | **Type**     | **Default**  | **required** | **Comment** |
 | ----------------- | ------------ | ------------ | ------------ | ----------- |
@@ -211,26 +211,26 @@
 | created_at        | Date         | current_date | +            |             |
 | updated_at        | Date         |              |              |             |
 
-##### Table “validation_offline_tasks” indexes
+##### Table “verification_offline_tasks” indexes
 
-| **Name**                      | **Columns**       | **Unique?** |
-| ----------------------------- | -----------       | ----------- |
-| validation_offline_tasks_ind0 | rate              |             |
-| validation_offline_tasks_ind1 | created_at        |             |
-| validation_offline_tasks_ind2 | specialization_id |             |
+| **Name**                        | **Columns**       | **Unique?** |
+| ------------------------------- | -----------       | ----------- |
+| verification_offline_tasks_ind0 | rate              |             |
+| verification_offline_tasks_ind1 | created_at        |             |
+| verification_offline_tasks_ind2 | specialization_id |             |
 
-##### Table “validation_offline_tasks” constraints
+##### Table “verification_offline_tasks” constraints
 
-| **Name**                     | **Columns**       | **Type** |
-| ---------------------------- | ----------------- | -------- |
-| validation_offline_tasks_pk0 | id                | PK       |
-| validation_offline_tasks_fk0 | created_by        | FK       |
-| validation_offline_tasks_fk1 | specialization_id | FK       |
+| **Name**                       | **Columns**       | **Type** |
+| ------------------------------ | ----------------- | -------- |
+| verification_offline_tasks_pk0 | id                | PK       |
+| verification_offline_tasks_fk0 | created_by        | FK       |
+| verification_offline_tasks_fk1 | specialization_id | FK       |
 
 
-### 8. Table “validation_offline_task_executions”
+### 8. Table “verification_offline_task_executions”
 
-##### Table “validation_offline_task_executions” columns
+##### Table “verification_offline_task_executions” columns
 
 | **Name**         | **Type** | **Default** | **required** | **Comment** |
 | ---------------- | -------- | ----------- | ------------ | ----------- |
@@ -243,19 +243,19 @@
 | review_rate      | int4     |             |              | 0...100     |
 | feedback         | text     |             |              |             |
 
-##### Table “validation_offline_task_executions” indexes
+##### Table “verification_offline_task_executions” indexes
 
 | **Name**                                | **Columns** | **Unique?** |
 | --------------------------------------- | ----------- | ----------- |
 |                                         |             |             |
 
-##### Table “validation_offline_task_executions” constraints
+##### Table “verification_offline_task_executions” constraints
 
-| **Name**                               | **Columns**      | **Type** |
-| -------------------------------------- | ---------------- | -------- |
-| validation_offline_task_executions_pk0 | id               | PK       |
-| validation_offline_task_executions_fk0 | task_id          | FK       |
-| validation_offline_task_executions_fk0 | executor_id      | FK       |
+| **Name**                                 | **Columns**      | **Type** |
+| ---------------------------------------- | ---------------- | -------- |
+| verification_offline_task_executions_pk0 | id               | PK       |
+| verification_offline_task_executions_fk0 | task_id          | FK       |
+| verification_offline_task_executions_fk0 | executor_id      | FK       |
 
 
 ## Dictionaries spec
@@ -288,11 +288,11 @@ Table for readonly for users!!
 | ------------------- | ----------- | -------- |
 | specializations_pk0 | id          | PK       |
 
-### 2. Dictionary table “validation_online_request_states”
+### 2. Dictionary table “verification_online_request_states”
 
 Table for readonly for users!!
 
-##### Table “validation_online_request_states” columns
+##### Table “verification_online_request_states” columns
 
 | **Name** | **Type**     | **Default** | **required** | **Comment** |
 | -------- | ------------ | ----------- | ------------ | ----------- |
@@ -300,23 +300,23 @@ Table for readonly for users!!
 | title    | varchar(255) |             | +            |             |
 | code     | varchar(50)  |             | +            |             |
 
-##### Table “validation_online_request_states” indexes
+##### Table “verification_online_request_states” indexes
 
 | **Name** | **Columns** | **Unique?** |
 | -------- | ----------- | ----------- |
 |          |             |             |
 
-##### Table “validation_online_request_states” constraints
+##### Table “verification_online_request_states” constraints
 
-| **Name**                             | **Columns** | **Type** |
-| ------------------------------------ | ----------- | -------- |
-| validation_online_request_states_pk0 | id          | PK       |
+| **Name**                               | **Columns** | **Type** |
+| -------------------------------------- | ----------- | -------- |
+| verification_online_request_states_pk0 | id          | PK       |
 
-### 3. Dictionary table “validation_online_session_types”
+### 3. Dictionary table “verification_online_session_types”
 
 Table for readonly for users!!
 
-##### Table “validation_online_session_types” columns
+##### Table “verification_online_session_types” columns
 
 | **Name** | **Type**     | **Default** | **required** | **Comment** |
 | -------- | ------------ | ----------- | ------------ | ----------- |
@@ -324,17 +324,17 @@ Table for readonly for users!!
 | title    | varchar(255) |             | +            |             |
 | code     | varchar(50)  |             | +            |             |
 
-##### Table “validation_online_session_types” indexes
+##### Table “verification_online_session_types” indexes
 
 | **Name** | **Columns** | **Unique?** |
 | -------- | ----------- | ----------- |
 |          |             |             |
 
-##### Table “validation_online_session_types” constraints
+##### Table “verification_online_session_types” constraints
 
-| **Name**                             | **Columns** | **Type** |
-| ------------------------------------ | ----------- | -------- |
-| validation_online_session_types_pk0  | id          | PK       |
+| **Name**                               | **Columns** | **Type** |
+| -------------------------------------- | ----------- | -------- |
+| verification_online_session_types_pk0  | id          | PK       |
 
 ## Dictionaries content
 
@@ -346,28 +346,28 @@ Table for readonly for users!!
 
 Content of this dictionary stored as ./csv/specializations.csv
 
-### 2. validation_online_request_states
+### 2. verification_online_request_states
 
 | **id** | **title** | **code** |
 | ------ | --------- | -------- |
 |        |           |          |
 
-Content of this dictionary stored as ./csv/validation_online_request_states.csv
+Content of this dictionary stored as ./csv/verification_online_request_states.csv
 
-### 3. validation_online_session_types
+### 3. verification_online_session_types
 
 | **id** | **title** | **code** |
 | ------ | --------- | -------- |
 |        |           |          |
 
-Content of this dictionary stored as ./csv/validation_online_session_types.csv
+Content of this dictionary stored as ./csv/verification_online_session_types.csv
 
 ## Changes
 
 | **Date**   | **Author**       | **Description**                                                    |
 | ---------- | ---------------- | ------------------------------------------------------------------ |
-| 11.03.2024 | Knyaginin Dmitry | YH-46. Create Validation module DB specification                   |
-| 01.04.2024 | Knyaginin Dmitry | YH-46. Add offline tasks, testing details, online validation types |
+| 11.03.2024 | Knyaginin Dmitry | YH-46. Create Verification module DB specification                   |
+| 01.04.2024 | Knyaginin Dmitry | YH-46. Add offline tasks, testing details, online verification types |
 |            |                  |                                                                    |
 |            |                  |                                                                    |
 |            |                  |                                                                    |
