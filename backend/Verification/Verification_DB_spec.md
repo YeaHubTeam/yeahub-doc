@@ -2,7 +2,7 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.1            |
+| Version | 0.0.2            |
 
 
 
@@ -163,15 +163,15 @@
 
 ### 6. Table “verification_online_session_attempts”
 
+Map attempts to slots by specialization_id of request and slot related profile
+
 ##### Table “verification_online_session_attempts” columns
 
 | **Name**           | **Type** | **Default** | **required** | **Comment** |
 | ------------------ | -------- | ----------- | ------------ | ----------- |
 | id                 | uuid     |             | +            | PK          |
 | verification_reqid | uuid     |             | +            | FK          |
-| plan_date          | Date     |             | +            |             |
-| begin_at           | Date     |             |              |             |
-| end_at             | Date     |             |              |             |
+| slot_id            | uuid     |             |              | FK          |
 | isSuccess          | boolean  |             |              |             |
 | feedback           | text     |             |              |             |
 
@@ -180,6 +180,7 @@
 | **Name**                                  | **Columns** | **Unique?** |
 | ----------------------------------------- | ----------- | ----------- |
 | verification_online_session_attempts_ind0 | plan_date   |             |
+| verification_online_session_attempts_ind1 | slot_id     |             |
 
 ##### Table “verification_online_session_attempts” constraints
 
@@ -256,6 +257,32 @@
 | verification_offline_task_executions_pk0 | id               | PK       |
 | verification_offline_task_executions_fk0 | task_id          | FK       |
 | verification_offline_task_executions_fk0 | executor_id      | FK       |
+
+
+### 9. Table “verification_online_session_slots”  
+
+##### Table “verification_online_session_slots” columns
+
+| **Name**           | **Type** | **Default** | **required** | **Comment** |
+| ------------------ | -------- | ----------- | ------------ | ----------- |
+| id                 | uuid     |             | +            | PK          |
+| profile_id         | uuid     |             | +            | FK          |
+| begin_at           | Date     |             |              |             |
+| end_at             | Date     |             |              |             |
+| busy               | Boolean  | false       |              |             |
+
+##### Table “verification_online_session_slots” indexes
+
+| **Name**                                  | **Columns** | **Unique?** |
+| ----------------------------------------- | ----------- | ----------- |
+| verification_online_session_slots_ind0    | plan_date   |             |
+
+##### Table “verification_online_session_slots” constraints
+
+| **Name**                                 | **Columns**        | **Type** |
+| --------------------------------------   | ------------------ | -------- |
+| verification_online_session_slots_pk0    | id                 | PK       |
+| verification_online_session_slots_fk0    | profile_id         | FK       |
 
 
 ## Dictionaries spec
@@ -364,12 +391,13 @@ Content of this dictionary stored as ./csv/verification_online_session_types.csv
 
 ## Changes
 
-| **Date**   | **Author**       | **Description**                                                    |
-| ---------- | ---------------- | ------------------------------------------------------------------ |
+| **Date**   | **Author**       | **Description**                                                      |
+| ---------- | ---------------- | -------------------------------------------------------------------- |
 | 11.03.2024 | Knyaginin Dmitry | YH-46. Create Verification module DB specification                   |
 | 01.04.2024 | Knyaginin Dmitry | YH-46. Add offline tasks, testing details, online verification types |
-|            |                  |                                                                    |
-|            |                  |                                                                    |
-|            |                  |                                                                    |
-|            |                  |                                                                    |
-|            |                  |                                                                    |
+| 16.04.2024 | Knyaginin Dmitry | YH-46. Add slots for online verification attempts                    |
+|            |                  |                                                                      |
+|            |                  |                                                                      |
+|            |                  |                                                                      |
+|            |                  |                                                                      |
+|            |                  |                                                                      |
