@@ -10,29 +10,31 @@
 
 ##### Table “questions” columns
 
-| **Name**    | **Type**      | **Default**  | **required** | **Comment** |
-| ----------- | ------------- | ------------ | ------------ | ----------- |
-| id          | uuid          |              | +            | PK          |
-| title       | varchar(255)  |              | +            |             |
-| description | text          |              | +            |             |
-| imageSrc    | varchar(255)  |              |              |             |
-| longAnswer  | varchar(1000) |              |              |             |
-| shortAnswer | varchar(255)  |              |              |             |
-| status      | varchar(50)   |              |              |             |
-| created_at  | Date          | current_date | +            |             |
-| updated_at  | Date          |              |              |             |
-| created_by  | uuid          |              | +            | FK          |
-| updated_by  | uuid          |              |              |             |
-| keywords    | text          |              |              |             |
+| **Name**          | **Type**      | **Default**  | **required** | **Comment** |
+| ----------------- | ------------- | ------------ | ------------ | ----------- |
+| id                | uuid          |              | +            | PK          |
+| title             | varchar(255)  |              | +            |             |
+| description       | text          |              | +            |             |
+| specialization_id | int4          |              | +            |             |
+| imageSrc          | varchar(255)  |              |              |             |
+| longAnswer        | varchar(1000) |              |              |             |
+| shortAnswer       | varchar(255)  |              |              |             |
+| status            | varchar(50)   |              |              |             |
+| created_at        | Date          | current_date | +            |             |
+| updated_at        | Date          |              |              |             |
+| created_by        | uuid          |              | +            | FK          |
+| updated_by        | uuid          |              |              |             |
+| keywords          | text          |              |              |             |
 
 
 ##### Table “questions” indexes
 
-| **Name**       | **Columns** | **Unique?** |
-| -------------- | ----------- | ----------- |
-| questions_ind0 | created_at  |             |
-| questions_ind1 | keywords    |             |
-| questions_ind2 | created_by  |             |
+| **Name**       | **Columns**       | **Unique?** |
+| -------------- | ----------------- | ----------- |
+| questions_ind0 | created_at        |             |
+| questions_ind1 | keywords          |             |
+| questions_ind2 | created_by        |             |
+| questions_ind3 | specialization_id |             |
 
 ##### Table “questions” constraints
 
