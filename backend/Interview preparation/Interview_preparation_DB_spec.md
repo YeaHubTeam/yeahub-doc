@@ -16,13 +16,14 @@
 | question_id  | uuid          |              | +            | PK          |
 | checks_count | int4          | 1            |              |             |
 | is_learned   | boolean       | false        |              |             |
+| last_update  | date          | current_date |              |             |
 
 
 ##### Table “inpr_profile_questions” indexes
 
 | **Name**                    | **Columns**                 | **Unique?** |
 | --------------------------- | --------------------------- | ----------- |
-|                             |                             |             |
+| inpr_profile_questions_ind0 | last_update                 |             |
 
 ##### Table “inpr_profile_questions” constraints
 
