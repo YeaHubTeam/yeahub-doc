@@ -60,30 +60,29 @@ This table caches count of fully learned questions for decrease DB load
 
 
 
-### 3. Table “inpr_profile_progress”
+### 3. Table “inpr_questions_count” 
 
-This table caches count of fully learned questions for decrease DB load
+This table caches count of questions for specializations for decrease DB load
 
-##### Table “inpr_profile_progress” columns
+##### Table “inpr_questions_count”  columns
 
 | **Name**           | **Type**      | **Default**  | **required** | **Comment** |
 | ------------------ | ------------- | ------------ | ------------ | ----------- |
-| profile_id         | uuid          |              | +            | PK          |
-| learned_count      | int4          |              |              |             |
+| specialization_id  | int4          |              | +            | PK          |
+| questions_count    | int4          |              |              |             |
 
 
-##### Table “inpr_profile_progress” indexes
+##### Table “inpr_questions_count”  indexes
 
 | **Name**                    | **Columns**                 | **Unique?** |
 | --------------------------- | --------------------------- | ----------- |
 |                             |                             |             |
 
-##### Table “inpr_profile_progress” constraints
+##### Table “inpr_questions_count”  constraints
 
 | **Name**                   | **Columns**                  | **Type** |
 | -------------------------- | ---------------------------- | -------- |
-| inpr_profile_progress_pk0  | profile_id                   | PK       |
-| inpr_profile_progress_fk0  | profile_id (profiles.id)     | FK       |
+| inpr_questions_count_pk0   | specialization_id            | PK       |
 
 
 
