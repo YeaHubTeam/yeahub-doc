@@ -65,7 +65,7 @@ For separate rating process  for every profile.
 
 ### 3. Table “profile_skills”
 
-For separate rating process  for every profile. 
+For profile skills mapping
 
 ##### Table “profile_skills” columns
 

@@ -2,48 +2,11 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.2            |
+| Version | 0.0.3            |
 
 
 
-### 1. Table “questions”
-
-##### Table “questions” columns
-
-| **Name**          | **Type**      | **Default**  | **required** | **Comment** |
-| ----------------- | ------------- | ------------ | ------------ | ----------- |
-| id                | uuid          |              | +            | PK          |
-| title             | varchar(255)  |              | +            |             |
-| description       | text          |              | +            |             |
-| specialization_id | int4          |              | +            |             |
-| imageSrc          | varchar(255)  |              |              |             |
-| longAnswer        | varchar(1000) |              |              |             |
-| shortAnswer       | varchar(255)  |              |              |             |
-| status            | varchar(50)   |              |              |             |
-| created_at        | Date          | current_date | +            |             |
-| updated_at        | Date          |              |              |             |
-| created_by        | uuid          |              | +            | FK          |
-| updated_by        | uuid          |              |              |             |
-| keywords          | text          |              |              |             |
-
-
-##### Table “questions” indexes
-
-| **Name**       | **Columns**       | **Unique?** |
-| -------------- | ----------------- | ----------- |
-| questions_ind0 | created_at        |             |
-| questions_ind1 | keywords          |             |
-| questions_ind2 | created_by        |             |
-| questions_ind3 | specialization_id |             |
-
-##### Table “questions” constraints
-
-| **Name**      | **Columns** | **Type** |
-| ------------- | ----------- | -------- |
-| questions_pk0 | Id          | PK       |
-| questions_fk0 | created_by  | FK       |
-
-### 2. Table “tests”
+### 1. Table “tests”
 
 ##### Table “tests” columns
 
@@ -84,7 +47,7 @@
 | tests_fk0 | created_by  | FK       |
 
 
-### 3. Table “tests_questions”
+### 2. Table “tests_questions”
 
 ##### Table “tests_questions” columns
 
@@ -107,7 +70,7 @@
 | tests_questions_pk0 | test_id, question_id | PK       |
 
 
-### 4. Table “tests_pass_attempts”
+### 3. Table “tests_pass_attempts”
 
 ##### Table “tests_pass_attempts” columns
 
@@ -132,7 +95,7 @@
 | tests_pass_attempts_pk0 | test_id, user_id | PK       |
 
 
-### 5. Table “verification_online_session_requests”
+### 4. Table “verification_online_session_requests”
 
 ##### Table “verification_online_session_requests” columns
 
@@ -163,7 +126,7 @@
 | verification_online_session_requests_fk1 | verification_online_request_states.specialization_id | FK       |
 
 
-### 6. Table “verification_online_session_attempts”
+### 5. Table “verification_online_session_attempts”
 
 Map attempts to slots by specialization_id of request and slot related profile
 
@@ -192,7 +155,7 @@ Map attempts to slots by specialization_id of request and slot related profile
 | verification_online_session_attempts_fk0 | verification_reqid | FK       |
 
 
-### 7. Table “verification_offline_tasks”
+### 6. Table “verification_offline_tasks”
 
 ##### Table “verification_offline_tasks” columns
 
@@ -231,7 +194,7 @@ Map attempts to slots by specialization_id of request and slot related profile
 | verification_offline_tasks_fk1 | specialization_id | FK       |
 
 
-### 8. Table “verification_offline_task_executions”
+### 7. Table “verification_offline_task_executions”
 
 ##### Table “verification_offline_task_executions” columns
 
@@ -261,7 +224,7 @@ Map attempts to slots by specialization_id of request and slot related profile
 | verification_offline_task_executions_fk0 | executor_id      | FK       |
 
 
-### 9. Table “verification_online_session_slots”  
+### 8. Table “verification_online_session_slots”  
 
 ##### Table “verification_online_session_slots” columns
 
@@ -290,34 +253,7 @@ Map attempts to slots by specialization_id of request and slot related profile
 ## Dictionaries spec
 
 
-### 1. Dictionary table “Specializations”
-
-Table for readonly for users!!
-
-##### Table “specializations” columns
-
-| **Name**    | **Type**     | **Default**  | **required** | **Comment** |
-| ----------- | ------------ | ------------ | ------------ | ----------- |
-| id          | int4         |              | +            | PK          |
-| title       | varchar(255) |              | +            |             |
-| description | text         |              | +            |             |
-| imageSrc    | varchar(255) |              |              |             |
-| created_at  | Date         | current_date | +            |             |
-| updated_at  | Date         |              |              |             |
-
-##### Table “specializations” indexes
-
-| **Name**             | **Columns** | **Unique?** |
-| -------------------- | ----------- | ----------- |
-| specializations_ind0 | title       | +           |
-
-##### Table “specializations” constraints
-
-| **Name**            | **Columns** | **Type** |
-| ------------------- | ----------- | -------- |
-| specializations_pk0 | id          | PK       |
-
-### 2. Dictionary table “verification_online_request_states”
+### 1. Dictionary table “verification_online_request_states”
 
 Table for readonly for users!!
 
@@ -341,7 +277,7 @@ Table for readonly for users!!
 | -------------------------------------- | ----------- | -------- |
 | verification_online_request_states_pk0 | id          | PK       |
 
-### 3. Dictionary table “verification_online_session_types”
+### 2. Dictionary table “verification_online_session_types”
 
 Table for readonly for users!!
 
@@ -367,15 +303,7 @@ Table for readonly for users!!
 
 ## Dictionaries content
 
-### 1. Specializations
-
-| **id** | **title** | **decriprion** |
-| ------ | --------- | -------------- |
-|        |           |                |
-
-Content of this dictionary stored as ./csv/specializations.csv
-
-### 2. verification_online_request_states
+### 1. verification_online_request_states
 
 | **id** | **title** | **code** |
 | ------ | --------- | -------- |
@@ -383,7 +311,7 @@ Content of this dictionary stored as ./csv/specializations.csv
 
 Content of this dictionary stored as ./csv/verification_online_request_states.csv
 
-### 3. verification_online_session_types
+### 2. verification_online_session_types
 
 | **id** | **title** | **code** |
 | ------ | --------- | -------- |
@@ -398,6 +326,7 @@ Content of this dictionary stored as ./csv/verification_online_session_types.csv
 | 11.03.2024 | Knyaginin Dmitry | YH-46. Create Verification module DB specification                   |
 | 01.04.2024 | Knyaginin Dmitry | YH-46. Add offline tasks, testing details, online verification types |
 | 16.04.2024 | Knyaginin Dmitry | YH-46. Add slots for online verification attempts                    |
+| 07.05.2024 | Knyaginin Dmitry | YH-46. Separate module Knowledge base added                          |
 |            |                  |                                                                      |
 |            |                  |                                                                      |
 |            |                  |                                                                      |
