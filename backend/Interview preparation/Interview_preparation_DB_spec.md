@@ -2,7 +2,7 @@
 
 | Author  | Knyaginin Dmitry |
 | ------- | ---------------- |
-| Version | 0.0.1            |
+| Version | 0.0.2            |
 
 
 
@@ -86,6 +86,35 @@ This table caches count of questions for specializations for decrease DB load
 | inpr_questions_count_pk0   | specialization_id            | PK       |
 
 
+### 4. Table “inpr_profile_quizzes”  
+
+##### Table “inpr_profile_quizzes” columns
+
+| **Name**       | **Type**      | **Default**  | **required** | **Comment** |
+| -------------- | ------------- | ------------ | ------------ | ----------- |
+| id             | uuid          |              | +            | PK          |
+| profile_id     | uuid          |              | +            | FK          |
+| start_date     | timestamp     | current_date | +            |             |
+| end_date       | timestamp     |              |              |             |
+| full_count     | int4          |              |              |             |
+| success_count  | int4          |              |              |             |
+| skills         | text[]        |              |              |             |
+| response       | text          |              |              | JSON        |
+
+
+##### Table “inpr_profile_quizzes” indexes
+
+| **Name**                    | **Columns**                 | **Unique?** |
+| --------------------------- | --------------------------- | ----------- |
+| inpr_profile_quizzes_ind0   | start_date                  |             |
+
+##### Table “inpr_profile_quizzes” constraints
+
+| **Name**                   | **Columns**                  | **Type** |
+| -------------------------- | ---------------------------- | -------- |
+| inpr_profile_quizzes_pk0   | id                           | PK       |
+| inpr_profile_quizzes_fk0   | profile_id (profiles.id)     | FK       |
+
 
 ## Dictionaries spec
 
@@ -98,6 +127,7 @@ This table caches count of questions for specializations for decrease DB load
 | **Date**   | **Author**       | **Description**                                                      |
 | ---------- | ---------------- | -------------------------------------------------------------------- |
 | 27.04.2024 | Knyaginin Dmitry | YH-46. Create Interview preparation module DB specification          |
+| 09.05.2024 | Knyaginin Dmitry | YH-46. Add table “inpr_profile_quizzes”                              |
 |            |                  |                                                                      |
 |            |                  |                                                                      |
 |            |                  |                                                                      |
