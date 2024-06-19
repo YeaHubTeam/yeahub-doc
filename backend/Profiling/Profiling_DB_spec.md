@@ -17,7 +17,7 @@ For specify user concrete type. Now by “profile_type” column (see comment)
 | id                | uuid     |             | +            | PK                                                                 |
 | user_id           | uuid     |             | +            | FK                                                                 |
 | profile_type      | int4     | 1           | +            | 1 – candidate, 2 – member,   3 - HR                                |
-| specialization_id | int8     |             | +            | FK for specializations.id                                 |
+| specialization_id | int4     |             | +            | FK for specializations.id                                 |
 | marking_weight    | int4     | 1           |              | For candidate only: weight in rating_points “like” from this  user |
 
 ##### Table “profiles” indexes

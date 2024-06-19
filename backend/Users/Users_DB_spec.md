@@ -53,19 +53,19 @@ Table for common users information
 
 Table for readonly for users!! Rows may be not exist for candidate! Default role - **candidate** 
 
-##### Table “role” columns
+##### Table “user_role” columns
 
-| **Name**  | **Type** | **Default** | **required** | **Comment** |
-| --------- | -------- | ----------- | ------------ | ----------- |
-| user_id   | uuid     |             | +            |             |
-| role_id   | int4     |             | +            |             |
-| setted_by | uuid     |             | +            |             |
+| **Name**       | **Type** | **Default** | **required** | **Comment** |
+| -------------- | -------- | ----------- | ------------ | ----------- |
+| user_id        | uuid     |             | +            |             |
+| user_role_id   | int4     |             | +            |             |
+| setted_by      | uuid     |             | +            |             |
 
-##### Table “role” constraints
+##### Table “user_role” constraints
 
-| **Name** | **Columns**            | **Type** |
-| -------- | ---------------------- | -------- |
-| role_pk0 | role_id, permission_id | PK       |
+| **Name**      | **Columns**            | **Type** |
+| ------------- | ---------------------- | -------- |
+| user_role_pk0 | role_id, permission_id | PK       |
 
 
 ## Dictionaries spec
