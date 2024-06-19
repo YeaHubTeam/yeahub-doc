@@ -43,7 +43,8 @@ This table caches count of fully learned questions for decrease DB load
 | **Name**           | **Type**      | **Default**  | **required** | **Comment** |
 | ------------------ | ------------- | ------------ | ------------ | ----------- |
 | profile_id         | uuid          |              | +            | PK          |
-| learned_count      | int4          |              |              |             |
+| specialization_id  | int4          |              |              |             |   
+| learned_count      | int4          |              |              |             |   
 
 
 ##### Table “inpr_profile_progress” indexes
